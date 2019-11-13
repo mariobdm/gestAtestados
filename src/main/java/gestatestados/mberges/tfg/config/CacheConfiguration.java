@@ -44,6 +44,14 @@ public class CacheConfiguration {
             createCache(cm, gestatestados.mberges.tfg.domain.User.class.getName() + ".authorities");
             createCache(cm, gestatestados.mberges.tfg.domain.PersistentToken.class.getName());
             createCache(cm, gestatestados.mberges.tfg.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, gestatestados.mberges.tfg.domain.Atestado.class.getName());
+            createCache(cm, gestatestados.mberges.tfg.domain.Atestado.class.getName() + ".documentos");
+            createCache(cm, gestatestados.mberges.tfg.domain.Atestado.class.getName() + ".implicados");
+            createCache(cm, gestatestados.mberges.tfg.domain.Documento.class.getName());
+            createCache(cm, gestatestados.mberges.tfg.domain.Destinatario.class.getName());
+            createCache(cm, gestatestados.mberges.tfg.domain.Remitente.class.getName());
+            createCache(cm, gestatestados.mberges.tfg.domain.Implicado.class.getName());
+            createCache(cm, gestatestados.mberges.tfg.domain.TasaAlcohol.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

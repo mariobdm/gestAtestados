@@ -1,0 +1,101 @@
+{
+    "name": "Atestado",
+    "fields": [
+        {
+            "fieldName": "numero",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tipojuicio",
+            "fieldType": "EnumTipoJuicio",
+            "fieldValues": "RAPIDO,ORDINARIO"
+        },
+        {
+            "fieldName": "fechaAtestado",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fechaHoraSuceso",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lugar",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accidente",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "permiso",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "alcoholemia",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "bienes",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "velocidad",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "lesiones",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "fallecido",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "instructor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "secretario",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "destinatario",
+            "otherEntityRelationshipName": "atestado",
+            "relationshipName": "destinatario",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "remitente",
+            "otherEntityRelationshipName": "atestado",
+            "relationshipName": "remitente",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "documento",
+            "otherEntityRelationshipName": "atestado",
+            "relationshipName": "documento"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "implicado",
+            "otherEntityRelationshipName": "atestado",
+            "relationshipName": "implicado"
+        }
+    ],
+    "changelogDate": "20191113151650",
+    "entityTableName": "atestado",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

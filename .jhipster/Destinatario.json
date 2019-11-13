@@ -1,0 +1,36 @@
+{
+    "name": "Destinatario",
+    "fields": [
+        {
+            "fieldName": "tipo",
+            "fieldType": "EnumTipoDestinatario",
+            "fieldValues": "AYUNTAMIENTO,GUARDIA_CIVIL,JUZGADO,FISCALIA"
+        },
+        {
+            "fieldName": "nombreDestinatario",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descDestinatario",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "atestado",
+            "otherEntityRelationshipName": "destinatario",
+            "relationshipName": "atestado",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191113151653",
+    "entityTableName": "destinatario",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

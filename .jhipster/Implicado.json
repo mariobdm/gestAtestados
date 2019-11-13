@@ -1,0 +1,77 @@
+{
+    "name": "Implicado",
+    "fields": [
+        {
+            "fieldName": "tipoDocumento",
+            "fieldType": "EnumTipoDocumentacion",
+            "fieldValues": "DNI,NIE,PASAPORTE,DOCUMENTO_EXTRANJERO,DESCONOCIDO"
+        },
+        {
+            "fieldName": "documento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "apellido1",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "apellido2",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fechaNacimiento",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "telefono",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "calidad",
+            "fieldType": "EnumTipoImplicado",
+            "fieldValues": "IMPUTADO,DETENIDO,TESTIGO,PASAJERO,VICTIMA,AGRESOR,CONDUCTOR"
+        },
+        {
+            "fieldName": "direccion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "municipio",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "codigopostal",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "tasaAlcohol",
+            "otherEntityRelationshipName": "implicado",
+            "relationshipName": "tasaAlcohol",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "atestado",
+            "otherEntityRelationshipName": "implicado",
+            "relationshipName": "atestado",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191113151655",
+    "entityTableName": "implicado",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

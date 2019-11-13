@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span>Documentos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-documento" [routerLink]="['/documento/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Documento
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="documentos?.length === 0">
+        <span>No documentos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="documentos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Nombre Doc</span></th>
+            <th><span>Desc Doc</span></th>
+            <th><span>Archivo</span></th>
+            <th><span>Archivo Pdf</span></th>
+            <th><span>Atestado</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let documento of documentos ;trackBy: trackId">
+                <td><a [routerLink]="['/documento', documento.id, 'view' ]">{{documento.id}}</a></td>
+                <td>{{documento.nombreDoc}}</td>
+                <td>{{documento.descDoc}}</td>
+                <td>
+                    <a *ngIf="documento.archivo" (click)="openFile(documento.archivoContentType, documento.archivo)">open</a>
+                    <span *ngIf="documento.archivo">{{documento.archivoContentType}}, {{byteSize(documento.archivo)}}</span>
+                </td>
+                <td>
+                    <a *ngIf="documento.archivoPdf" (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)">open</a>
+                    <span *ngIf="documento.archivoPdf">{{documento.archivoPdfContentType}}, {{byteSize(documento.archivoPdf)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="documento.atestado">
+                        <a [routerLink]="['/atestado', documento.atestado?.id, 'view' ]" >{{documento.atestado?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/documento', documento.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/documento', documento.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/documento', { outlets: { popup: documento.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

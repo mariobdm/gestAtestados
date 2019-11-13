@@ -1,0 +1,5 @@
+export const enum EnumTipoRemitente {
+  POLICIA_LOCAL = 'POLICIA_LOCAL',
+  GUARDIA_CIVIL = 'GUARDIA_CIVIL',
+  POLICIA_NACIONAL = 'POLICIA_NACIONAL'
+}

@@ -1,0 +1,79 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="implicado">
+            <h2><span>Implicado</span> {{implicado.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Tipo Documento</span></dt>
+                <dd>
+                    <span>{{implicado.tipoDocumento}}</span>
+                </dd>
+                <dt><span>Documento</span></dt>
+                <dd>
+                    <span>{{implicado.documento}}</span>
+                </dd>
+                <dt><span>Nombre</span></dt>
+                <dd>
+                    <span>{{implicado.nombre}}</span>
+                </dd>
+                <dt><span>Apellido 1</span></dt>
+                <dd>
+                    <span>{{implicado.apellido1}}</span>
+                </dd>
+                <dt><span>Apellido 2</span></dt>
+                <dd>
+                    <span>{{implicado.apellido2}}</span>
+                </dd>
+                <dt><span>Fecha Nacimiento</span></dt>
+                <dd>
+                    <span>{{implicado.fechaNacimiento}}</span>
+                </dd>
+                <dt><span>Telefono</span></dt>
+                <dd>
+                    <span>{{implicado.telefono}}</span>
+                </dd>
+                <dt><span>Calidad</span></dt>
+                <dd>
+                    <span>{{implicado.calidad}}</span>
+                </dd>
+                <dt><span>Direccion</span></dt>
+                <dd>
+                    <span>{{implicado.direccion}}</span>
+                </dd>
+                <dt><span>Municipio</span></dt>
+                <dd>
+                    <span>{{implicado.municipio}}</span>
+                </dd>
+                <dt><span>Codigopostal</span></dt>
+                <dd>
+                    <span>{{implicado.codigopostal}}</span>
+                </dd>
+                <dt><span>Tasa Alcohol</span></dt>
+                <dd>
+                    <div *ngIf="implicado.tasaAlcohol">
+                        <a [routerLink]="['/tasa-alcohol', implicado.tasaAlcohol?.id, 'view']">{{implicado.tasaAlcohol?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Atestado</span></dt>
+                <dd>
+                    <div *ngIf="implicado.atestado">
+                        <a [routerLink]="['/atestado', implicado.atestado?.id, 'view']">{{implicado.atestado?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/implicado', implicado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

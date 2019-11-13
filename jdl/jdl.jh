@@ -1,0 +1,98 @@
+entity Atestado
+{
+	numero String,
+    tipojuicio EnumTipoJuicio,
+    fechaAtestado LocalDate,
+    fechaHoraSuceso ZonedDateTime,
+    lugar String
+    accidente Boolean,
+    permiso Boolean,
+    alcoholemia Boolean,
+    bienes Boolean,
+    velocidad Boolean,
+    lesiones Boolean,
+    fallecido Boolean
+    instructor String,
+    secretario String
+}
+
+entity Documento
+{
+	nombreDoc String,
+    descDoc String,
+    archivo AnyBlob,
+    archivoPdf AnyBlob,
+}
+
+entity Destinatario
+{
+	tipo EnumTipoDestinatario,
+    nombreDestinatario String,
+    descDestinatario String
+}
+
+entity Remitente
+{
+	tipo EnumTipoRemitente,
+    nombreRemitente String,
+    descRemitente String
+}
+
+entity Implicado
+{
+	tipoDocumento EnumTipoDocumentacion,
+    documento String,
+	nombre String,
+    apellido1 String,
+    apellido2 String,
+    fechaNacimiento LocalDate,
+    telefono String,
+    calidad EnumTipoImplicado,
+    direccion String,
+    municipio String,
+    codigopostal Integer
+}
+
+entity TasaAlcohol
+{
+    tasaNoEvidencial Float,
+    tasaEvidencial1 Float,
+    tasaEvidencial2 Float,
+    tasaEnSangre Float
+}
+
+relationship OneToMany
+{
+	Atestado to Documento,
+    Atestado to Implicado
+}
+ 
+relationship OneToOne
+{
+ 	Atestado to Destinatario,
+	Atestado to Remitente,
+    Implicado to TasaAlcohol,
+}
+
+enum EnumTipoJuicio
+{
+	RAPIDO, ORDINARIO
+}
+enum EnumTipoRemitente
+{
+	POLICIA_LOCAL, GUARDIA_CIVIL, POLICIA_NACIONAL
+}
+enum EnumTipoImplicado
+{
+	IMPUTADO, DETENIDO, TESTIGO, PASAJERO, VICTIMA, AGRESOR, CONDUCTOR
+}
+enum EnumTipoDocumentacion
+{
+	DNI, NIE, PASAPORTE, DOCUMENTO_EXTRANJERO, DESCONOCIDO
+}
+enum EnumTipoDestinatario
+{
+	AYUNTAMIENTO, GUARDIA_CIVIL, JUZGADO, FISCALIA
+}
+
+

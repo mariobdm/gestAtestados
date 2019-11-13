@@ -1,0 +1,9 @@
+export const enum EnumTipoImplicado {
+  IMPUTADO = 'IMPUTADO',
+  DETENIDO = 'DETENIDO',
+  TESTIGO = 'TESTIGO',
+  PASAJERO = 'PASAJERO',
+  VICTIMA = 'VICTIMA',
+  AGRESOR = 'AGRESOR',
+  CONDUCTOR = 'CONDUCTOR'
+}

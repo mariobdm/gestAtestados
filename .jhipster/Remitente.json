@@ -1,0 +1,36 @@
+{
+    "name": "Remitente",
+    "fields": [
+        {
+            "fieldName": "tipo",
+            "fieldType": "EnumTipoRemitente",
+            "fieldValues": "POLICIA_LOCAL,GUARDIA_CIVIL,POLICIA_NACIONAL"
+        },
+        {
+            "fieldName": "nombreRemitente",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descRemitente",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "atestado",
+            "otherEntityRelationshipName": "remitente",
+            "relationshipName": "atestado",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191113151654",
+    "entityTableName": "remitente",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

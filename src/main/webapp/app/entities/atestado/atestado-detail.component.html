@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="atestado">
+            <h2><span>Atestado</span> {{atestado.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Numero</span></dt>
+                <dd>
+                    <span>{{atestado.numero}}</span>
+                </dd>
+                <dt><span>Tipojuicio</span></dt>
+                <dd>
+                    <span>{{atestado.tipojuicio}}</span>
+                </dd>
+                <dt><span>Fecha Atestado</span></dt>
+                <dd>
+                    <span>{{atestado.fechaAtestado}}</span>
+                </dd>
+                <dt><span>Fecha Hora Suceso</span></dt>
+                <dd>
+                    <span>{{atestado.fechaHoraSuceso}}</span>
+                </dd>
+                <dt><span>Lugar</span></dt>
+                <dd>
+                    <span>{{atestado.lugar}}</span>
+                </dd>
+                <dt><span>Accidente</span></dt>
+                <dd>
+                    <span>{{atestado.accidente}}</span>
+                </dd>
+                <dt><span>Permiso</span></dt>
+                <dd>
+                    <span>{{atestado.permiso}}</span>
+                </dd>
+                <dt><span>Alcoholemia</span></dt>
+                <dd>
+                    <span>{{atestado.alcoholemia}}</span>
+                </dd>
+                <dt><span>Bienes</span></dt>
+                <dd>
+                    <span>{{atestado.bienes}}</span>
+                </dd>
+                <dt><span>Velocidad</span></dt>
+                <dd>
+                    <span>{{atestado.velocidad}}</span>
+                </dd>
+                <dt><span>Lesiones</span></dt>
+                <dd>
+                    <span>{{atestado.lesiones}}</span>
+                </dd>
+                <dt><span>Fallecido</span></dt>
+                <dd>
+                    <span>{{atestado.fallecido}}</span>
+                </dd>
+                <dt><span>Instructor</span></dt>
+                <dd>
+                    <span>{{atestado.instructor}}</span>
+                </dd>
+                <dt><span>Secretario</span></dt>
+                <dd>
+                    <span>{{atestado.secretario}}</span>
+                </dd>
+                <dt><span>Destinatario</span></dt>
+                <dd>
+                    <div *ngIf="atestado.destinatario">
+                        <a [routerLink]="['/destinatario', atestado.destinatario?.id, 'view']">{{atestado.destinatario?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Remitente</span></dt>
+                <dd>
+                    <div *ngIf="atestado.remitente">
+                        <a [routerLink]="['/remitente', atestado.remitente?.id, 'view']">{{atestado.remitente?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/atestado', atestado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

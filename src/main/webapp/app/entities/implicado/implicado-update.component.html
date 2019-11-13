@@ -1,0 +1,109 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-implicado-heading">Create or edit a Implicado</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipoDocumento">Tipo Documento</label>
+                    <select class="form-control" name="tipoDocumento" formControlName="tipoDocumento" id="field_tipoDocumento">
+                        <option value="DNI">DNI</option>
+                        <option value="NIE">NIE</option>
+                        <option value="PASAPORTE">PASAPORTE</option>
+                        <option value="DOCUMENTO_EXTRANJERO">DOCUMENTO_EXTRANJERO</option>
+                        <option value="DESCONOCIDO">DESCONOCIDO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_documento">Documento</label>
+                    <input type="text" class="form-control" name="documento" id="field_documento"
+                           formControlName="documento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                           formControlName="nombre"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_apellido1">Apellido 1</label>
+                    <input type="text" class="form-control" name="apellido1" id="field_apellido1"
+                           formControlName="apellido1"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_apellido2">Apellido 2</label>
+                    <input type="text" class="form-control" name="apellido2" id="field_apellido2"
+                           formControlName="apellido2"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaNacimiento">Fecha Nacimiento</label>
+                    <div class="input-group">
+                        <input id="field_fechaNacimiento" type="text" class="form-control" name="fechaNacimiento" ngbDatepicker  #fechaNacimientoDp="ngbDatepicker" formControlName="fechaNacimiento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaNacimientoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_telefono">Telefono</label>
+                    <input type="text" class="form-control" name="telefono" id="field_telefono"
+                           formControlName="telefono"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_calidad">Calidad</label>
+                    <select class="form-control" name="calidad" formControlName="calidad" id="field_calidad">
+                        <option value="IMPUTADO">IMPUTADO</option>
+                        <option value="DETENIDO">DETENIDO</option>
+                        <option value="TESTIGO">TESTIGO</option>
+                        <option value="PASAJERO">PASAJERO</option>
+                        <option value="VICTIMA">VICTIMA</option>
+                        <option value="AGRESOR">AGRESOR</option>
+                        <option value="CONDUCTOR">CONDUCTOR</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_direccion">Direccion</label>
+                    <input type="text" class="form-control" name="direccion" id="field_direccion"
+                           formControlName="direccion"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_municipio">Municipio</label>
+                    <input type="text" class="form-control" name="municipio" id="field_municipio"
+                           formControlName="municipio"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codigopostal">Codigopostal</label>
+                    <input type="number" class="form-control" name="codigopostal" id="field_codigopostal"
+                           formControlName="codigopostal"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tasaAlcohol">Tasa Alcohol</label>
+                    <select class="form-control" id="field_tasaAlcohol" name="tasaAlcohol" formControlName="tasaAlcohol">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tasaAlcoholOption.id === editForm.get('tasaAlcohol').value?.id ? editForm.get('tasaAlcohol').value : tasaAlcoholOption" *ngFor="let tasaAlcoholOption of tasaalcohols; trackBy: trackTasaAlcoholById">{{tasaAlcoholOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_atestado">Atestado</label>
+                    <select class="form-control" id="field_atestado" name="atestado" formControlName="atestado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="atestadoOption.id === editForm.get('atestado').value?.id ? editForm.get('atestado').value : atestadoOption" *ngFor="let atestadoOption of atestados; trackBy: trackAtestadoById">{{atestadoOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

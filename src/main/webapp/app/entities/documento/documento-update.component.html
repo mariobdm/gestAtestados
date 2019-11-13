@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-documento-heading">Create or edit a Documento</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombreDoc">Nombre Doc</label>
+                    <input type="text" class="form-control" name="nombreDoc" id="field_nombreDoc"
+                           formControlName="nombreDoc"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descDoc">Desc Doc</label>
+                    <input type="text" class="form-control" name="descDoc" id="field_descDoc"
+                           formControlName="descDoc"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_archivo">Archivo</label>
+                    <div>
+                        <div *ngIf="editForm.get('archivo').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('archivoContentType').value, editForm.get('archivo').value)">open</a><br>
+                            <span class="pull-left">{{editForm.get('archivoContentType').value}}, {{byteSize(editForm.get('archivo').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({archivo: null});editForm.patchValue({archivoContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_archivo" (change)="setFileData($event, 'archivo', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="archivo" id="field_archivo"
+                           formControlName="archivo"/>
+                    <input type="hidden" class="form-control" name="archivoContentType" id="field_archivoContentType"
+                           formControlName="archivoContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_archivoPdf">Archivo Pdf</label>
+                    <div>
+                        <div *ngIf="editForm.get('archivoPdf').value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('archivoPdfContentType').value, editForm.get('archivoPdf').value)">open</a><br>
+                            <span class="pull-left">{{editForm.get('archivoPdfContentType').value}}, {{byteSize(editForm.get('archivoPdf').value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({archivoPdf: null});editForm.patchValue({archivoPdfContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_archivoPdf" (change)="setFileData($event, 'archivoPdf', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="archivoPdf" id="field_archivoPdf"
+                           formControlName="archivoPdf"/>
+                    <input type="hidden" class="form-control" name="archivoPdfContentType" id="field_archivoPdfContentType"
+                           formControlName="archivoPdfContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_atestado">Atestado</label>
+                    <select class="form-control" id="field_atestado" name="atestado" formControlName="atestado">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="atestadoOption.id === editForm.get('atestado').value?.id ? editForm.get('atestado').value : atestadoOption" *ngFor="let atestadoOption of atestados; trackBy: trackAtestadoById">{{atestadoOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

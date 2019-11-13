@@ -1,0 +1,115 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-atestado-heading">Create or edit a Atestado</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_tipojuicio">Tipojuicio</label>
+                    <select class="form-control" name="tipojuicio" formControlName="tipojuicio" id="field_tipojuicio">
+                        <option value="RAPIDO">RAPIDO</option>
+                        <option value="ORDINARIO">ORDINARIO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaAtestado">Fecha Atestado</label>
+                    <div class="input-group">
+                        <input id="field_fechaAtestado" type="text" class="form-control" name="fechaAtestado" ngbDatepicker  #fechaAtestadoDp="ngbDatepicker" formControlName="fechaAtestado"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="fechaAtestadoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fechaHoraSuceso">Fecha Hora Suceso</label>
+                    <div class="d-flex">
+                        <input id="field_fechaHoraSuceso" type="datetime-local" class="form-control" name="fechaHoraSuceso" formControlName="fechaHoraSuceso" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lugar">Lugar</label>
+                    <input type="text" class="form-control" name="lugar" id="field_lugar"
+                           formControlName="lugar"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_accidente">Accidente</label>
+                    <input type="checkbox" class="form-control" name="accidente" id="field_accidente"
+                           formControlName="accidente"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_permiso">Permiso</label>
+                    <input type="checkbox" class="form-control" name="permiso" id="field_permiso"
+                           formControlName="permiso"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_alcoholemia">Alcoholemia</label>
+                    <input type="checkbox" class="form-control" name="alcoholemia" id="field_alcoholemia"
+                           formControlName="alcoholemia"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_bienes">Bienes</label>
+                    <input type="checkbox" class="form-control" name="bienes" id="field_bienes"
+                           formControlName="bienes"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_velocidad">Velocidad</label>
+                    <input type="checkbox" class="form-control" name="velocidad" id="field_velocidad"
+                           formControlName="velocidad"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lesiones">Lesiones</label>
+                    <input type="checkbox" class="form-control" name="lesiones" id="field_lesiones"
+                           formControlName="lesiones"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fallecido">Fallecido</label>
+                    <input type="checkbox" class="form-control" name="fallecido" id="field_fallecido"
+                           formControlName="fallecido"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_instructor">Instructor</label>
+                    <input type="text" class="form-control" name="instructor" id="field_instructor"
+                           formControlName="instructor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_secretario">Secretario</label>
+                    <input type="text" class="form-control" name="secretario" id="field_secretario"
+                           formControlName="secretario"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_destinatario">Destinatario</label>
+                    <select class="form-control" id="field_destinatario" name="destinatario" formControlName="destinatario">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="destinatarioOption.id === editForm.get('destinatario').value?.id ? editForm.get('destinatario').value : destinatarioOption" *ngFor="let destinatarioOption of destinatarios; trackBy: trackDestinatarioById">{{destinatarioOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_remitente">Remitente</label>
+                    <select class="form-control" id="field_remitente" name="remitente" formControlName="remitente">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="remitenteOption.id === editForm.get('remitente').value?.id ? editForm.get('remitente').value : remitenteOption" *ngFor="let remitenteOption of remitentes; trackBy: trackRemitenteById">{{remitenteOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

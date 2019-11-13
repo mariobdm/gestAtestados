@@ -1,0 +1,39 @@
+{
+    "name": "TasaAlcohol",
+    "fields": [
+        {
+            "fieldName": "tasaNoEvidencial",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "tasaEvidencial1",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "tasaEvidencial2",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "tasaEnSangre",
+            "fieldType": "Float"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "implicado",
+            "otherEntityRelationshipName": "tasaAlcohol",
+            "relationshipName": "implicado",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20191113151656",
+    "entityTableName": "tasa_alcohol",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

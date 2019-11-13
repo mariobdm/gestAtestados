@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documento">
+            <h2><span>Documento</span> {{documento.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Nombre Doc</span></dt>
+                <dd>
+                    <span>{{documento.nombreDoc}}</span>
+                </dd>
+                <dt><span>Desc Doc</span></dt>
+                <dd>
+                    <span>{{documento.descDoc}}</span>
+                </dd>
+                <dt><span>Archivo</span></dt>
+                <dd>
+                    <div *ngIf="documento.archivo">
+                        <a (click)="openFile(documento.archivoContentType, documento.archivo)">open</a>
+                        {{documento.archivoContentType}}, {{byteSize(documento.archivo)}}
+                    </div>
+                </dd>
+                <dt><span>Archivo Pdf</span></dt>
+                <dd>
+                    <div *ngIf="documento.archivoPdf">
+                        <a (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)">open</a>
+                        {{documento.archivoPdfContentType}}, {{byteSize(documento.archivoPdf)}}
+                    </div>
+                </dd>
+                <dt><span>Atestado</span></dt>
+                <dd>
+                    <div *ngIf="documento.atestado">
+                        <a [routerLink]="['/atestado', documento.atestado?.id, 'view']">{{documento.atestado?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/documento', documento.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div>
+    <h2 id="page-heading">
+        <span>Remitentes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-remitente" [routerLink]="['/remitente/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Remitente
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="remitentes?.length === 0">
+        <span>No remitentes found</span>
+    </div>
+    <div class="table-responsive" *ngIf="remitentes?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Tipo</span></th>
+            <th><span>Nombre Remitente</span></th>
+            <th><span>Desc Remitente</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let remitente of remitentes ;trackBy: trackId">
+                <td><a [routerLink]="['/remitente', remitente.id, 'view' ]">{{remitente.id}}</a></td>
+                <td>{{remitente.tipo}}</td>
+                <td>{{remitente.nombreRemitente}}</td>
+                <td>{{remitente.descRemitente}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/remitente', remitente.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/remitente', remitente.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/remitente', { outlets: { popup: remitente.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

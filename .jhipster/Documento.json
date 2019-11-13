@@ -1,0 +1,41 @@
+{
+    "name": "Documento",
+    "fields": [
+        {
+            "fieldName": "nombreDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "descDoc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "archivo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "archivoPdf",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "atestado",
+            "otherEntityRelationshipName": "documento",
+            "relationshipName": "atestado",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191113151652",
+    "entityTableName": "documento",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,7 @@
+export const enum EnumTipoDocumentacion {
+  DNI = 'DNI',
+  NIE = 'NIE',
+  PASAPORTE = 'PASAPORTE',
+  DOCUMENTO_EXTRANJERO = 'DOCUMENTO_EXTRANJERO',
+  DESCONOCIDO = 'DESCONOCIDO'
+}

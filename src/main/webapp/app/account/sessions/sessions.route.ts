@@ -7,7 +7,7 @@ export const sessionsRoute: Route = {
   path: 'sessions',
   component: SessionsComponent,
   data: {
-    authorities: ['ROLE_USER'],
+    authorities: ['ROLE_USER', 'ROLE_MODIFY', 'ROLE_DELETE'],
     pageTitle: 'Sessions'
   },
   canActivate: [UserRouteAccessService]

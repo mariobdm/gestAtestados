@@ -10,6 +10,7 @@ import { DocumentoComponent } from './documento.component';
 import { DocumentoDetailComponent } from './documento-detail.component';
 import { DocumentoUpdateComponent } from './documento-update.component';
 import { DocumentoDeletePopupComponent } from './documento-delete-dialog.component';
+import { DocumentoAtestadoComponent } from './documento-atestado.component';
 import { IDocumento } from 'app/shared/model/documento.model';
 
 @Injectable({ providedIn: 'root' })
@@ -71,6 +72,18 @@ export const documentoRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'Documentos'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'atestado/:id',
+    component: DocumentoAtestadoComponent,
+    resolve: {
+      documento: DocumentoResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'Documentos por Atestado'
     },
     canActivate: [UserRouteAccessService]
   }

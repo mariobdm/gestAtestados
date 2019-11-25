@@ -66,6 +66,14 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
+                        <!-- nuevo document by id atestado -->
+                        <button type="submit"
+                                [routerLink]="['/documento/atestado', atestado.id]"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'book'"></fa-icon>
+                            <span class="d-none d-md-inline">Docs Atestado</span>
+                        </button>
+                        <!-- /nuevo -->
                         <button type="submit"
                                 [routerLink]="['/atestado', atestado.id, 'view' ]"
                                 class="btn btn-info btn-sm">

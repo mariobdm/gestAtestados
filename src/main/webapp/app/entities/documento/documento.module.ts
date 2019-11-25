@@ -7,6 +7,7 @@ import { DocumentoDetailComponent } from './documento-detail.component';
 import { DocumentoUpdateComponent } from './documento-update.component';
 import { DocumentoDeletePopupComponent, DocumentoDeleteDialogComponent } from './documento-delete-dialog.component';
 import { documentoRoute, documentoPopupRoute } from './documento.route';
+import { DocumentoAtestadoComponent } from './documento-atestado.component';
 
 const ENTITY_STATES = [...documentoRoute, ...documentoPopupRoute];
 
@@ -17,8 +18,15 @@ const ENTITY_STATES = [...documentoRoute, ...documentoPopupRoute];
     DocumentoDetailComponent,
     DocumentoUpdateComponent,
     DocumentoDeleteDialogComponent,
-    DocumentoDeletePopupComponent
+    DocumentoDeletePopupComponent,
+    DocumentoAtestadoComponent
   ],
-  entryComponents: [DocumentoComponent, DocumentoUpdateComponent, DocumentoDeleteDialogComponent, DocumentoDeletePopupComponent]
+  entryComponents: [
+    DocumentoComponent,
+    DocumentoUpdateComponent,
+    DocumentoDeleteDialogComponent,
+    DocumentoDeletePopupComponent,
+    DocumentoAtestadoComponent
+  ]
 })
 export class GestAtestadosDocumentoModule {}

@@ -104,6 +104,19 @@ public class DocumentoResource {
     }
 
     /**
+     * {@code GET  documentos/atestado/:id} : get documents by atestado id.
+     *
+     * @param id the id atestado
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the documento, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/documentos/atestado/{id}")
+    public List<Documento> getDocumentosByAtestado(@PathVariable Long id) {
+        log.debug("REST request to get Documents by Atestado : {}", id);
+        List<Documento> documentos = documentoRepository.findDocumentosByAtestado(id);
+        return documentos;
+    }
+
+    /**
      * {@code DELETE  /documentos/:id} : delete the "id" documento.
      *
      * @param id the id of the documento to delete.

@@ -35,4 +35,8 @@ export class DocumentoService {
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
+
+  findByAtestado(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IDocumento[]>(`${this.resourceUrl}/atestado/${id}`, { observe: 'response' });
+  }
 }

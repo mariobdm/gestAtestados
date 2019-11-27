@@ -17,10 +17,10 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-            <th><span>ID</span></th>
+            <th class="d-none"><span>ID</span></th>
             <th><span>Numero</span></th>
-            <th><span>Tipojuicio</span></th>
-            <th><span>Fecha Atestado</span></th>
+            <th class="d-none"><span>Tipojuicio</span></th>
+            <th class="d-none"><span class="d-none">Fecha Atestado</span></th>
             <th><span>Fecha Hora Suceso</span></th>
             <th><span>Lugar</span></th>
             <th><span>Accidente</span></th>
@@ -39,10 +39,10 @@
             </thead>
             <tbody>
             <tr *ngFor="let atestado of atestados ;trackBy: trackId">
-                <td><a [routerLink]="['/atestado', atestado.id, 'view' ]">{{atestado.id}}</a></td>
+                <td class="d-none"><a [routerLink]="['/atestado', atestado.id, 'view' ]">{{atestado.id}}</a></td>
                 <td>{{atestado.numero}}</td>
-                <td>{{atestado.tipojuicio}}</td>
-                <td>{{atestado.fechaAtestado | date:'mediumDate'}}</td>
+                <td class="d-none">{{atestado.tipojuicio}}</td>
+                <td class="d-none">{{atestado.fechaAtestado | date:'mediumDate'}}</td>
                 <td>{{atestado.fechaHoraSuceso | date:'medium'}}</td>
                 <td>{{atestado.lugar}}</td>
                 <td>{{atestado.accidente}}</td>
@@ -56,12 +56,12 @@
                 <td>{{atestado.secretario}}</td>
                 <td>
                     <div *ngIf="atestado.destinatario">
-                        <a [routerLink]="['/destinatario', atestado.destinatario?.id, 'view' ]" >{{atestado.destinatario?.id}}</a>
+                        <a [routerLink]="['/destinatario', atestado.destinatario?.id, 'view' ]" >{{atestado.destinatario?.nombreDestinatario}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="atestado.remitente">
-                        <a [routerLink]="['/remitente', atestado.remitente?.id, 'view' ]" >{{atestado.remitente?.id}}</a>
+                        <a [routerLink]="['/remitente', atestado.remitente?.id, 'view' ]" >{{atestado.remitente?.nombreRemitente}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -80,13 +80,13 @@
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline">View</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_MODIFY'" type="submit"
                                 [routerLink]="['/atestado', atestado.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button *jhiHasAnyAuthority="'ROLE_DELETE'" type="submit"
                                 [routerLink]="['/atestado', { outlets: { popup: atestado.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

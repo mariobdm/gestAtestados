@@ -91,14 +91,14 @@
                     <label class="form-control-label" for="field_destinatario">Destinatario</label>
                     <select class="form-control" id="field_destinatario" name="destinatario" formControlName="destinatario">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="destinatarioOption.id === editForm.get('destinatario').value?.id ? editForm.get('destinatario').value : destinatarioOption" *ngFor="let destinatarioOption of destinatarios; trackBy: trackDestinatarioById">{{destinatarioOption.id}}</option>
+                        <option [ngValue]="destinatarioOption.id === editForm.get('destinatario').value?.id ? editForm.get('destinatario').value : destinatarioOption" *ngFor="let destinatarioOption of destinatarios; trackBy: trackDestinatarioById">{{destinatarioOption.nombreDestinatario}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_remitente">Remitente</label>
                     <select class="form-control" id="field_remitente" name="remitente" formControlName="remitente">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="remitenteOption.id === editForm.get('remitente').value?.id ? editForm.get('remitente').value : remitenteOption" *ngFor="let remitenteOption of remitentes; trackBy: trackRemitenteById">{{remitenteOption.id}}</option>
+                        <option [ngValue]="remitenteOption.id === editForm.get('remitente').value?.id ? editForm.get('remitente').value : remitenteOption" *ngFor="let remitenteOption of remitentes; trackBy: trackRemitenteById">{{remitenteOption.nombreRemitente}}</option>
                     </select>
                 </div>
             </div>

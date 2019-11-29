@@ -16,7 +16,64 @@
                     </span>
                 </a>
             </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="atestado" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="car-crash"></fa-icon>
+                        <span>Atestados</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="documento" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="book"></fa-icon>
+                        <span>Documentos</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="implicado" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="users"></fa-icon>
+                        <span>Implicados</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="remitente" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="share-square"></fa-icon>
+                        <span>Remitentes</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="destinatario" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="landmark"></fa-icon>
+                        <span>Destinatarios</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="tasa-alcohol" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="wine-glass-alt"></fa-icon>
+                        <span>Tasas</span>
+                    </span>
+                </a>
+            </li>
+            <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" routerLink="estadisticas" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon icon="square-root-alt"></fa-icon>
+                        <span>Estadisticas</span>
+                    </span>
+                </a>
+            </li>
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+            <!--
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
@@ -63,9 +120,9 @@
                             <span>Tasa Alcohol</span>
                         </a>
                     </li>
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
+            -->
             <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>

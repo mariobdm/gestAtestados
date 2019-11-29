@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-atestado" [routerLink]="['/atestado/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create a new Atestado
+            Nuevo Atestado
             </span>
         </button>
     </h2>
@@ -66,14 +66,6 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group">
-                        <!-- nuevo document by id atestado -->
-                        <button type="submit"
-                                [routerLink]="['/documento/atestado', atestado.id]"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'book'"></fa-icon>
-                            <span class="d-none d-md-inline">Docs Atestado</span>
-                        </button>
-                        <!-- /nuevo -->
                         <button type="submit"
                                 [routerLink]="['/atestado', atestado.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -94,6 +86,39 @@
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline">Delete</span>
                         </button>
+                        <!-- nuevo document by id atestado -->
+                        <button type="submit"
+                                [routerLink]="['/documento/atestado', atestado.id]"
+                                class="btn btn-success btn-sm">
+                            <fa-icon [icon]="'archive'"></fa-icon>
+                            <span class="d-none d-md-inline">Documentos</span>
+                        </button>
+                        <!-- /nuevo -->
+                        <!-- nuevo implicados by id atestado -->
+                        <button type="submit"
+                                [routerLink]="['/implicado/atestado', atestado.id]"
+                                class="btn btn-dark btn-sm">
+                            <fa-icon [icon]="'users'"></fa-icon>
+                            <span class="d-none d-md-inline">Implicados</span>
+                        </button>
+                        <!-- /nuevo -->
+                        <!-- nuevo informe docx -->
+                        <button type="submit"
+                                [routerLink]="['/informeword', atestado.id]"
+                                class="btn btn-secondary btn-sm">
+                            <fa-icon [icon]="'file-word'"></fa-icon>
+                            <span class="d-none d-md-inline">Docx</span>
+                        </button>
+                        <!-- /nuevo -->
+                        <!-- nuevo informe pdf -->
+                        <button type="submit"
+                                [routerLink]="['/informepdf', atestado.id]"
+                                class="btn btn-warning btn-sm">
+                            <fa-icon [icon]="'file-pdf'"></fa-icon>
+                            <span class="d-none d-md-inline">Pdf</span>
+                        </button>
+                        <!-- /nuevo -->
+
                     </div>
                 </td>
             </tr>

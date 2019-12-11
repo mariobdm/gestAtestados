@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span>Atestados</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-atestado" [routerLink]="['/atestado/new']">
+        <button *jhiHasAnyAuthority="'ROLE_MODIFY'" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-atestado" [routerLink]="['/atestado/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
             Nuevo Atestado

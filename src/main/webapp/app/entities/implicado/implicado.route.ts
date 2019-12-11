@@ -11,6 +11,7 @@ import { ImplicadoDetailComponent } from './implicado-detail.component';
 import { ImplicadoUpdateComponent } from './implicado-update.component';
 import { ImplicadoDeletePopupComponent } from './implicado-delete-dialog.component';
 import { IImplicado } from 'app/shared/model/implicado.model';
+import { ImplicadoAtestadoComponent } from './implicado-atestado.component';
 
 @Injectable({ providedIn: 'root' })
 export class ImplicadoResolve implements Resolve<IImplicado> {
@@ -71,6 +72,18 @@ export const implicadoRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'Implicados'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'atestado/:id',
+    component: ImplicadoAtestadoComponent,
+    resolve: {
+      documento: ImplicadoResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'Implicado por Atestado'
     },
     canActivate: [UserRouteAccessService]
   }

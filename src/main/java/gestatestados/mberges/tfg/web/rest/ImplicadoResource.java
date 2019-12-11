@@ -104,6 +104,19 @@ public class ImplicadoResource {
     }
 
     /**
+     * {@code GET  implicados/atestado/:id} : get documents by atestado id.
+     *
+     * @param id the id atestado
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the documento, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/implicados/atestado/{id}")
+    public List<Implicado> getImplicadosByAtestado(@PathVariable Long id) {
+        log.debug("REST request to get Implicados by Atestado : {}", id);
+        List<Implicado> implicados = implicadoRepository.findImplicadosByAtestado(id);
+        return implicados;
+    }
+
+    /**
      * {@code DELETE  /implicados/:id} : delete the "id" implicado.
      *
      * @param id the id of the implicado to delete.

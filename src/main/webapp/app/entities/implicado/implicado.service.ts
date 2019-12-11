@@ -50,6 +50,10 @@ export class ImplicadoService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  findByAtestado(id: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IImplicado[]>(`${this.resourceUrl}/atestado/${id}`, { observe: 'response' });
+  }
+
   protected convertDateFromClient(implicado: IImplicado): IImplicado {
     const copy: IImplicado = Object.assign({}, implicado, {
       fechaNacimiento:

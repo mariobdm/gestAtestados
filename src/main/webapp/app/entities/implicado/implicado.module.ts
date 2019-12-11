@@ -7,6 +7,7 @@ import { ImplicadoDetailComponent } from './implicado-detail.component';
 import { ImplicadoUpdateComponent } from './implicado-update.component';
 import { ImplicadoDeletePopupComponent, ImplicadoDeleteDialogComponent } from './implicado-delete-dialog.component';
 import { implicadoRoute, implicadoPopupRoute } from './implicado.route';
+import { ImplicadoAtestadoComponent } from './implicado-atestado.component';
 
 const ENTITY_STATES = [...implicadoRoute, ...implicadoPopupRoute];
 
@@ -17,8 +18,15 @@ const ENTITY_STATES = [...implicadoRoute, ...implicadoPopupRoute];
     ImplicadoDetailComponent,
     ImplicadoUpdateComponent,
     ImplicadoDeleteDialogComponent,
-    ImplicadoDeletePopupComponent
+    ImplicadoDeletePopupComponent,
+    ImplicadoAtestadoComponent
   ],
-  entryComponents: [ImplicadoComponent, ImplicadoUpdateComponent, ImplicadoDeleteDialogComponent, ImplicadoDeletePopupComponent]
+  entryComponents: [
+    ImplicadoComponent,
+    ImplicadoUpdateComponent,
+    ImplicadoDeleteDialogComponent,
+    ImplicadoDeletePopupComponent,
+    ImplicadoAtestadoComponent
+  ]
 })
 export class GestAtestadosImplicadoModule {}

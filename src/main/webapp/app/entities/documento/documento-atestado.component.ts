@@ -11,7 +11,7 @@ import { DocumentoService } from './documento.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'jhi-documento-atestadp',
+  selector: 'jhi-documento-atestado',
   templateUrl: './documento-atestado.component.html'
 })
 export class DocumentoAtestadoComponent implements OnInit, OnDestroy {

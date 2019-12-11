@@ -103,20 +103,21 @@
                         </button>
                         <!-- /nuevo -->
                         <!-- nuevo informe docx -->
-                        <button type="submit"
-                                [routerLink]="['/informeword', atestado.id]"
-                                class="btn btn-secondary btn-sm">
+                        <a href="api/informeAtestadoWord/{{atestado.id}}" target="_blank" class="btn btn-warning btn-sm">
+                            <span class="fa fas fa-table"></span>
                             <fa-icon [icon]="'file-word'"></fa-icon>
-                            <span class="d-none d-md-inline">Docx</span>
-                        </button>
+                            <span class="d-none d-md-inline">Informe Word</span>
+                        </a>
                         <!-- /nuevo -->
                         <!-- nuevo informe pdf -->
+                        <!--
                         <button type="submit"
                                 [routerLink]="['/informepdf', atestado.id]"
                                 class="btn btn-warning btn-sm">
                             <fa-icon [icon]="'file-pdf'"></fa-icon>
                             <span class="d-none d-md-inline">Pdf</span>
                         </button>
+                        -->
                         <!-- /nuevo -->
 
                     </div>

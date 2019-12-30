@@ -14,19 +14,6 @@ import gestatestados.mberges.tfg.repository.RemitenteRepository;
 import gestatestados.mberges.tfg.repository.DestinatarioRepository;
 import gestatestados.mberges.tfg.repository.TasaAlcoholRepository;
 
-import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.apache.poi.xwpf.usermodel.Borders;
-import org.apache.poi.xwpf.usermodel.BreakClear;
-import org.apache.poi.xwpf.usermodel.BreakType;
-import org.apache.poi.xwpf.usermodel.LineSpacingRule;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.TextAlignment;
-import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
-import org.apache.poi.xwpf.usermodel.VerticalAlign;
-
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -43,6 +30,9 @@ import java.util.Optional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -113,57 +103,23 @@ public class InformeAtestadoWordResource {
     @GetMapping("/informeAtestadoWord/{id}")
     public void createInformeAtestadoWord(@PathVariable Long id, HttpServletResponse response) throws Exception {
         log.debug("REST request create Informe Atestado Word : {}", id);
-
         XWPFDocument doc = new XWPFDocument();
 
         //Crear archivo docx
-        Optional<Atestado> atestado = atestadoRepository.findById(id);
+        Optional<Atestado> atestado = this.atestadoRepository.findById(id);
         XWPFParagraph p1 = doc.createParagraph();
+        try
+        {
+            crearCabecera(doc, p1, atestado.get().getNumero());
+        }
+        catch(Exception e)
+        {
+            log.debug("ERROR:", e.toString());
+        }
+        crearTablaDatosAtestado(doc, p1, atestado);
+        //XWPFParagraph p2 = doc.createParagraph();
 
         /*
-        p1.setAlignment(ParagraphAlignment.CENTER);
-        p1.setBorderBottom(Borders.DOUBLE);
-        p1.setBorderTop(Borders.DOUBLE);
-
-        p1.setBorderRight(Borders.DOUBLE);
-        p1.setBorderLeft(Borders.DOUBLE);
-        p1.setBorderBetween(Borders.SINGLE);
-
-        p1.setVerticalAlignment(TextAlignment.TOP);
-
-        XWPFRun r1 = p1.createRun();
-        r1.setBold(true);
-        r1.setText("Número Atestado:"+atestado.get().getNumero().toString());
-        r1.setBold(true);
-        r1.setFontFamily("Courier");
-        r1.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
-        r1.setTextPosition(100);
-
-        r1.setBold(true);
-        r1.setText("Lugar:"+atestado.get().getLugar().toString());
-        r1.setBold(true);
-        r1.setFontFamily("Courier");
-        r1.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
-        r1.setTextPosition(100);
-
-        r1.setBold(true);
-        r1.setText("Fecha:"+atestado.get().getFechaAtestado().toString());
-        r1.setBold(true);
-        r1.setFontFamily("Courier");
-        r1.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
-        r1.setTextPosition(100);
-        */
-
-        XWPFParagraph p2 = doc.createParagraph();
-        p2.setAlignment(ParagraphAlignment.RIGHT);
-        p2.setBorderBottom(Borders.DOUBLE);
-        p2.setBorderTop(Borders.DOUBLE);
-        p2.setBorderRight(Borders.DOUBLE);
-        p2.setBorderLeft(Borders.DOUBLE);
-        p2.setBorderBetween(Borders.SINGLE);
-
-        XWPFRun r2 = p2.createRun();
-/*
         int numDoc = 1;
         List<Documento> listDocumentosByAtestado = documentoRepository.findDocumentosByAtestado(id);
         for (Documento d : listDocumentosByAtestado) {
@@ -172,55 +128,10 @@ public class InformeAtestadoWordResource {
             r2.setFontSize(20);
             log.debug("NOMBREDOC:"+d.getNombreDoc());
            }
-*/
-        // create header
-        CTSectPr sectPr = doc.getDocument().getBody().addNewSectPr();
-        log.debug("Ctsectpr");
-        XWPFHeaderFooterPolicy headerFooterPolicy = new XWPFHeaderFooterPolicy(doc, sectPr);
-        log.debug("xwpfheaderfooter");
-
-        XWPFHeader header = headerFooterPolicy.createHeader(XWPFHeaderFooterPolicy.DEFAULT);
-        log.debug("header");
-
-        //p2 = header.getParagraphArray(0);
-        p2.setAlignment(ParagraphAlignment.LEFT);
-
-        //CTTabStop tabStop = p2.getCTP().getPPr().addNewTabs().addNewTab();
-        //log.debug("tabstop");
-
-        //tabStop.setVal(STTabJc.RIGHT);
-        //int twipsPerInch =  1440;
-        //tabStop.setPos(BigInteger.valueOf(6 * twipsPerInch));
-
-        //r2 = p2.createRun();
-        //r2.setText("The Header:");
-        //r2.addTab();
-
-        String imgFile="./src/main/java/gestatestados/mberges/tfg/content/escudoPL.jpg";
-        r2.addPicture(new FileInputStream(imgFile), XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(50), Units.toEMU(50));
-        //String imgFile2="../../content/ayunt2PL.jpg";
-        String imgFile2="./src/main/java/gestatestados/mberges/tfg/content/ayunt2PL.jpg";
-        r2.addPicture(new FileInputStream(imgFile2), XWPFDocument.PICTURE_TYPE_JPEG, imgFile2, Units.toEMU(50), Units.toEMU(50));
-
-        log.debug("create footer");
-        // create footer start
-        XWPFFooter footer = headerFooterPolicy.createFooter(XWPFHeaderFooterPolicy.DEFAULT);
-        log.debug("create footer");
-
-        //p2 = footer.getParagraphArray(0);
-        p2.setAlignment(ParagraphAlignment.LEFT);
-
-        r2 = p2.createRun();
-        //r2.setText("The Footer:");
-
-        //try (FileOutputStream out = new FileOutputStream("simple.docx")) {
-        //    doc.write(out);
-        //}
-        log.debug("vamoosossss",doc.toString());
-
+        */
 
         response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        response.setHeader("Content-disposition", "filename=\"informeAtestado.docx\"");
+        response.setHeader("Content-disposition", "filename=\"informeAtestado"+atestado.get().getNumero().trim().toString()+".docx\"");
         ServletOutputStream streamVar = response.getOutputStream();
         doc.write(streamVar);
         streamVar.flush();
@@ -228,4 +139,178 @@ public class InformeAtestadoWordResource {
         doc.close();
     }
 
+    private void crearTablaDatosAtestado(XWPFDocument doc, XWPFParagraph p1, Optional<Atestado> atestado)
+    {
+      //p1 = doc.createParagraph();
+      p1.setAlignment(ParagraphAlignment.LEFT);
+
+      //título
+      XWPFRun p11 = p1.createRun();
+
+      p11.addBreak();
+      p11.addBreak();
+      p11.setBold(true);
+      p11.setItalic(true);
+      p11.setTextPosition(100);
+      p11.setText("INFORME RESUMEN GENERAL ATESTADO "+atestado.get().getNumero().toString());
+      p11.addBreak();
+
+      XWPFRun p12 = p1.createRun();
+      String strDateFormat = "dd-MM-aaaa hh:mm:ss"; // El formato de fecha está especificado 
+      SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm:ss Z");
+      //LocalDate dt = LocalDate.parse("2018-11-01");
+      //String formattedString = zonedDateTime.format(formatter);
+
+      p12.addBreak();
+      if(atestado.get().getFechaHoraSuceso() != null)
+      {
+        p12.setText("- FECHA/HORA SUCESO: "+atestado.get().getFechaHoraSuceso().format(formatter));
+        p12.addBreak();
+      }
+      if(atestado.get().getLugar() != null)
+      {
+        p12.setText("- LUGAR: "+atestado.get().getLugar());
+        p12.addBreak();
+      }
+
+      if(atestado.get().getInstructor() != null)
+      {
+        p12.setText("- INSTRUCTOR: "+atestado.get().getInstructor());
+        p12.addBreak();
+      }
+      if(atestado.get().getSecretario() != null)
+      {
+        p12.setText("- SECRETARIO: "+atestado.get().getSecretario());
+        p12.addBreak();
+      }
+
+      if(atestado.get().getTipojuicio() != null)
+      {
+        p12.setText("- TIPO DE JUICIO: "+atestado.get().getTipojuicio().toString());
+        p12.addBreak();
+      }
+      if(atestado.get().getDestinatario() != null)
+      {
+        p12.setText("- DESTINATARIO: "+atestado.get().getDestinatario().getNombreDestinatario().toString());
+        p12.addBreak();
+      }
+      if(atestado.get().getFechaAtestado() != null)
+      {
+        p12.setText("- FECHA REALIZACIÓN ATESTADO: "+atestado.get().getFechaAtestado());
+        p12.addBreak();
+      }
+      if(atestado.get().getRemitente() != null)
+      {
+        p12.setText("- REMITENTE: "+atestado.get().getRemitente().getNombreRemitente().toString());
+        p12.addBreak();
+      }
+      p12.setText("- TIPO ATESTADO: "+ this.getTipoAtestado(atestado));
+
+      p12.addBreak();
+      p12.addBreak();
+      p12.addBreak();
+
+      /*
+      XWPFTable table = doc.createTable();
+
+      XWPFTableRow tableRow1 = table.getRow(0);
+      tableRow1.getCell(0).setText("LUGAR");
+      tableRow1.addNewTableCell().setText(atestado.get().getLugar());
+
+      XWPFTableRow tableRow2 = table.createRow();
+      tableRow2.getCell(0).setText("FECHA SUCESO");
+      tableRow2.getCell(1).setText(atestado.get().getFechaHoraSuceso().toString());
+
+      XWPFTableRow tableRow3 = table.createRow();
+      tableRow3.getCell(0).setText("");
+      tableRow3.getCell(1).setText(atestado.get().getInstructor());
+
+      XWPFTableRow tableRow4 = table.createRow();
+      tableRow4.getCell(0).setText("");
+      tableRow4.getCell(1).setText(atestado.get().getSecretario());
+
+      XWPFTableRow tableRow5 = table.createRow();
+      tableRow5.getCell(0).setText("");
+      tableRow5.getCell(1).setText(atestado.get().getFechaAtestado().toString());
+      */
+
+    }
+
+    private String getTipoAtestado(Optional<Atestado> atestado)
+    {
+      String tipoAtestado = "";
+
+      if(atestado.get().isAccidente())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " ACCIDENTE DE TRÁFICO ";
+        else
+            tipoAtestado = tipoAtestado + " + ACCIDENTE DE TRÁFICO ";
+      }
+      if(atestado.get().isAlcoholemia())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " ALCOHOLEMIA ";
+        else
+            tipoAtestado = tipoAtestado + " + ALCOHOLEMIA ";
+      }
+      if(atestado.get().isVelocidad())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " EXCESO VELOCIDAD ";
+        else
+            tipoAtestado = tipoAtestado + " + EXCESO VELOCIDAD ";
+      }
+      if(atestado.get().isBienes())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " DAÑOS EN BIENES ";
+        else
+            tipoAtestado = tipoAtestado + " + DAÑOS EN BIENES ";
+      }
+      if(atestado.get().isPermiso())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " NO PERMISO DE CONDUCCIÓN ";
+        else
+            tipoAtestado = tipoAtestado + " + NO PERMISO DE CONDUCCIÓN ";
+      }
+      if(atestado.get().isLesiones())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " LESIONES ";
+        else
+            tipoAtestado = tipoAtestado + " + LESIONES ";
+      }
+      if(atestado.get().isFallecido())
+      {
+        if(tipoAtestado=="")
+            tipoAtestado = tipoAtestado + " FALLECIDOS ";
+        else
+            tipoAtestado = tipoAtestado + " + FALLECIDOS ";
+      }
+      return tipoAtestado;
+    }
+    private void crearCabecera(XWPFDocument d, XWPFParagraph p, String numatestado) throws Exception
+    {
+        p.setAlignment(ParagraphAlignment.LEFT);
+        XWPFRun r = p.createRun();
+
+        String imgFile="./src/main/java/gestatestados/mberges/tfg/content/escudoPL.jpg";
+        r.addPicture(new FileInputStream(imgFile), XWPFDocument.PICTURE_TYPE_JPEG, imgFile, Units.toEMU(50), Units.toEMU(50));
+        String imgFile2="./src/main/java/gestatestados/mberges/tfg/content/ayunt2PL.jpg";
+        r.addPicture(new FileInputStream(imgFile2), XWPFDocument.PICTURE_TYPE_JPEG, imgFile2, Units.toEMU(50), Units.toEMU(50));
+
+        //XWPFParagraph p = d.createParagraph();
+        p.setAlignment(ParagraphAlignment.RIGHT);
+
+        XWPFRun r2 = p.createRun();
+        r2.addTab();
+        r2.addTab();
+        r2.addTab();
+
+        r2.setText("Diligencias Nº "+numatestado);
+    }
 }

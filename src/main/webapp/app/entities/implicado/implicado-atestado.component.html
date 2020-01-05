@@ -17,7 +17,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-            <th><span>ID</span></th>
+            <!--<th><span>ID</span></th>-->
             <th><span>Tipo Documento</span></th>
             <th><span>Documento</span></th>
             <th><span>Nombre</span></th>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let implicado of implicados ;trackBy: trackId">
-                <td><a [routerLink]="['/implicado', implicado.id, 'view' ]">{{implicado.id}}</a></td>
+                <!--<td><a [routerLink]="['/implicado', implicado.id, 'view' ]">{{implicado.id}}</a></td>-->
                 <td>{{implicado.tipoDocumento}}</td>
                 <td>{{implicado.documento}}</td>
                 <td>{{implicado.nombre}}</td>
@@ -55,7 +55,7 @@
                 </td>
                 <td>
                     <div *ngIf="implicado.atestado">
-                        <a [routerLink]="['/atestado', implicado.atestado?.id, 'view' ]" >{{implicado.atestado?.id}}</a>
+                        <a [routerLink]="['/atestado', implicado.atestado?.id, 'view' ]" >{{implicado.atestado?.numero}}</a>
                     </div>
                 </td>
                 <td class="text-right">

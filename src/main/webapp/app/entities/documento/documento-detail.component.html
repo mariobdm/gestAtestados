@@ -30,7 +30,7 @@
                 <dt><span>Atestado</span></dt>
                 <dd>
                     <div *ngIf="documento.atestado">
-                        <a [routerLink]="['/atestado', documento.atestado?.id, 'view']">{{documento.atestado?.id}}</a>
+                        <a [routerLink]="['/atestado', documento.atestado?.id, 'view']">{{documento.atestado?.numero}}</a>
                     </div>
                 </dd>
             </dl>

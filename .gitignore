@@ -74,7 +74,15 @@ out/
 # Maven
 ######################
 /log/
-/target/
+/target/cache-loader/
+/target/classes/
+/target/generated-sources/
+/target/generated-test-sources/
+/target/maven-archiver/
+/target/maven-status/
+/target/test-classes/
+
+
 
 ######################
 # Gradle
@@ -85,8 +93,8 @@ out/
 ######################
 # Package Files
 ######################
-*.jar
-*.war
+#*.jar
+#*.war
 *.ear
 *.db
 

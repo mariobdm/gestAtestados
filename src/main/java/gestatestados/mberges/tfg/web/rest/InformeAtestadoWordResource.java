@@ -2,10 +2,10 @@ package gestatestados.mberges.tfg.web.rest;
 
 import gestatestados.mberges.tfg.domain.Atestado;
 import gestatestados.mberges.tfg.domain.Documento;
-import gestatestados.mberges.tfg.domain.Implicado;
-import gestatestados.mberges.tfg.domain.Destinatario;
-import gestatestados.mberges.tfg.domain.Remitente;
-import gestatestados.mberges.tfg.domain.TasaAlcohol;
+//import gestatestados.mberges.tfg.domain.Implicado;
+//import gestatestados.mberges.tfg.domain.Destinatario;
+//import gestatestados.mberges.tfg.domain.Remitente;
+//import gestatestados.mberges.tfg.domain.TasaAlcohol;
 
 import gestatestados.mberges.tfg.repository.AtestadoRepository;
 import gestatestados.mberges.tfg.repository.DocumentoRepository;
@@ -14,45 +14,41 @@ import gestatestados.mberges.tfg.repository.RemitenteRepository;
 import gestatestados.mberges.tfg.repository.DestinatarioRepository;
 import gestatestados.mberges.tfg.repository.TasaAlcoholRepository;
 
-import io.github.jhipster.web.util.HeaderUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+//import io.github.jhipster.web.util.HeaderUtil;
+//import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+//import java.net.URI;
+//import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
+//import java.io.IOException;
+//import java.util.ArrayList;
+//import java.util.Set;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.util.Date;
 import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.File;
-import java.io.FileOutputStream;
+//import java.io.File;
+//import java.io.FileOutputStream;
 import java.io.FileInputStream;
 
 import org.apache.poi.util.Units;
-
 import org.apache.poi.xwpf.usermodel.*;
+//import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
+//import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
+//import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTabStop;
+//import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
 
-import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
-
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
-
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTabStop;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
-
-import java.math.BigInteger;
+//import java.math.BigInteger;
  /*
  * REST controller for managing {@link gestatestados.mberges.tfg.domain.Atestado}.
  */
@@ -67,20 +63,20 @@ public class InformeAtestadoWordResource {
 
     private final AtestadoRepository atestadoRepository;
     private final DocumentoRepository documentoRepository;
-    private final RemitenteRepository remitenteRepository;
-    private final DestinatarioRepository destinatarioRepository;
-    private final ImplicadoRepository implicadoRepository;
-    private final TasaAlcoholRepository tasaAlcoholRepository;
+    //private final RemitenteRepository remitenteRepository;
+    //private final DestinatarioRepository destinatarioRepository;
+    //private final ImplicadoRepository implicadoRepository;
+    //private final TasaAlcoholRepository tasaAlcoholRepository;
 
     public InformeAtestadoWordResource(AtestadoRepository atestadoRepository, DocumentoRepository documentoRepository,
                             RemitenteRepository remitenteRepository, DestinatarioRepository destinatarioRepository,
                             ImplicadoRepository implicadoRepository, TasaAlcoholRepository tasaAlcoholRepository) {
         this.atestadoRepository = atestadoRepository;
         this.documentoRepository = documentoRepository;
-        this.remitenteRepository = remitenteRepository;
-        this.destinatarioRepository = destinatarioRepository;
-        this.implicadoRepository = implicadoRepository;
-        this.tasaAlcoholRepository = tasaAlcoholRepository;
+        //this.remitenteRepository = remitenteRepository;
+        //this.destinatarioRepository = destinatarioRepository;
+        //this.implicadoRepository = implicadoRepository;
+        //this.tasaAlcoholRepository = tasaAlcoholRepository;
     }
 
     /**
@@ -117,18 +113,9 @@ public class InformeAtestadoWordResource {
             log.debug("ERROR:", e.toString());
         }
         crearTablaDatosAtestado(doc, p1, atestado);
+        XWPFParagraph p2 = doc.createParagraph();
+        crearTablaDocumentosAtestado(doc,p2,atestado);
         //XWPFParagraph p2 = doc.createParagraph();
-
-        /*
-        int numDoc = 1;
-        List<Documento> listDocumentosByAtestado = documentoRepository.findDocumentosByAtestado(id);
-        for (Documento d : listDocumentosByAtestado) {
-            r2.setText("Doc "+(numDoc++)+":"+d.getNombreDoc().toString());
-            r2.setStrikeThrough(true);
-            r2.setFontSize(20);
-            log.debug("NOMBREDOC:"+d.getNombreDoc());
-           }
-        */
 
         response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         response.setHeader("Content-disposition", "filename=\"informeAtestado"+atestado.get().getNumero().trim().toString()+".docx\"");
@@ -137,6 +124,28 @@ public class InformeAtestadoWordResource {
         streamVar.flush();
         streamVar.close();
         doc.close();
+    }
+    private void crearTablaDocumentosAtestado(XWPFDocument doc, XWPFParagraph p2, Optional<Atestado> atestado)
+    {
+      p2.setAlignment(ParagraphAlignment.LEFT);
+      XWPFRun p21 = p2.createRun();
+      p21.setBold(true);
+      p21.setItalic(true);
+      //p21.setTextPosition(100);
+      p21.setText("* Relación Documentos Atestado número "+atestado.get().getNumero().toString());
+      p21.addBreak();
+      p21.addBreak();
+      p21.setBold(false);
+      p21.setItalic(false);
+
+      int numDoc = 1;
+      List<Documento> listDocumentosByAtestado = documentoRepository.findDocumentosByAtestado(atestado.get().getId());
+      for (Documento d : listDocumentosByAtestado) {
+        p21.setText(" - Doc "+(numDoc++)+":"+d.getNombreDoc().toString());
+        p21.addBreak();
+        log.debug("NOMBREDOC:"+d.getNombreDoc());
+       }
+
     }
 
     private void crearTablaDatosAtestado(XWPFDocument doc, XWPFParagraph p1, Optional<Atestado> atestado)

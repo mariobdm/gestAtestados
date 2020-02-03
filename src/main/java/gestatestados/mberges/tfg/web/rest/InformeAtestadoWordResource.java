@@ -141,7 +141,7 @@ public class InformeAtestadoWordResource {
       int numDoc = 1;
       List<Documento> listDocumentosByAtestado = documentoRepository.findDocumentosByAtestado(atestado.get().getId());
       for (Documento d : listDocumentosByAtestado) {
-        p21.setText(" - Doc "+(numDoc++)+":"+d.getNombreDoc().toString());
+        p21.setText(" - "+(numDoc++)+"."+d.getNombreDoc().toString());
         p21.addBreak();
         log.debug("NOMBREDOC:"+d.getNombreDoc());
        }

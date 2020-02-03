@@ -78,13 +78,6 @@ export const documentoRoute: Routes = [
   {
     path: 'atestado/:id',
     component: DocumentoAtestadoComponent,
-    resolve: {
-      documento: DocumentoResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'Documentos por Atestado'
-    },
     canActivate: [UserRouteAccessService]
   }
 ];

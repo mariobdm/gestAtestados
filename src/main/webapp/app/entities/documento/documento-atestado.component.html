@@ -17,7 +17,7 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-            <!--<th><span>ID</span></th>-->
+            <th><span>ID</span></th>
             <th><span>Nombre Doc</span></th>
             <th><span>Desc Doc</span></th>
             <th><span>Archivo</span></th>
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let documento of documentos ;trackBy: trackId">
-                <!--<td><a [routerLink]="['/documento', documento.id, 'view' ]">{{documento.id}}</a></td>-->
+                <td><a [routerLink]="['/documento', documento.id, 'view' ]">{{documento.id}}</a></td>
                 <td>{{documento.nombreDoc}}</td>
                 <td>{{documento.descDoc}}</td>
                 <td>

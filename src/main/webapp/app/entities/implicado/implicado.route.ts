@@ -78,13 +78,6 @@ export const implicadoRoute: Routes = [
   {
     path: 'atestado/:id',
     component: ImplicadoAtestadoComponent,
-    resolve: {
-      documento: ImplicadoResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'Implicado por Atestado'
-    },
     canActivate: [UserRouteAccessService]
   }
 ];

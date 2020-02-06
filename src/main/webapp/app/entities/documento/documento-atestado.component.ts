@@ -29,7 +29,6 @@ export class DocumentoAtestadoComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  /*
   loadAll() {
     this.documentoService
       .query()
@@ -44,7 +43,7 @@ export class DocumentoAtestadoComponent implements OnInit, OnDestroy {
         (res: HttpErrorResponse) => this.onError(res.message)
       );
   }
-*/
+
   cargarDocumentos(id: number) {
     this.documentoService.findByAtestado(id).subscribe(
       (res: HttpResponse<IDocumento[]>) => {
@@ -77,10 +76,10 @@ export class DocumentoAtestadoComponent implements OnInit, OnDestroy {
       this.idAtestado = params['id'];
     });
     // this.cargarDocsByAtestado();
-    // this.accountService.identity().then(account => {
-    //  this.currentAccount = account;
-    // });
-    // this.registerChangeInDocumentos();
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInDocumentos();
   }
 
   ngOnDestroy() {
@@ -99,11 +98,10 @@ export class DocumentoAtestadoComponent implements OnInit, OnDestroy {
     return this.dataUtils.openFile(contentType, field);
   }
 
-  /*
   registerChangeInDocumentos() {
-    this.eventSubscriber = this.eventManager.subscribe('documentoListModification', response => this.loadAll());
+    this.eventSubscriber = this.eventManager.subscribe('documentoListModification', response => this.cargarDocumentos(this.idAtestado));
   }
-*/
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }

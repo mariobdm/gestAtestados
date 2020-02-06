@@ -16,14 +16,14 @@
                 <dt><span>Archivo</span></dt>
                 <dd>
                     <div *ngIf="documento.archivo">
-                        <a (click)="openFile(documento.archivoContentType, documento.archivo)">open</a>
+                        <a (click)="openFile(documento.archivoContentType, documento.archivo)" class="alert-link">[Descargar Docx]</a>
                         {{documento.archivoContentType}}, {{byteSize(documento.archivo)}}
                     </div>
                 </dd>
                 <dt><span>Archivo Pdf</span></dt>
                 <dd>
                     <div *ngIf="documento.archivoPdf">
-                        <a (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)">open</a>
+                        <a (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)" class="alert-link">[Ver Pdf]</a>
                         {{documento.archivoPdfContentType}}, {{byteSize(documento.archivoPdf)}}
                     </div>
                 </dd>

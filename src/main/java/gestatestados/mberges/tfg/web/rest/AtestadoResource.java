@@ -2,6 +2,11 @@ package gestatestados.mberges.tfg.web.rest;
 
 import gestatestados.mberges.tfg.domain.Atestado;
 import gestatestados.mberges.tfg.repository.AtestadoRepository;
+import gestatestados.mberges.tfg.domain.Documento;
+import gestatestados.mberges.tfg.repository.DocumentoRepository;
+import gestatestados.mberges.tfg.domain.Implicado;
+import gestatestados.mberges.tfg.repository.ImplicadoRepository;
+
 import gestatestados.mberges.tfg.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -18,6 +23,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Transactional;
 /**
  * REST controller for managing {@link gestatestados.mberges.tfg.domain.Atestado}.
  */
@@ -33,9 +39,13 @@ public class AtestadoResource {
     private String applicationName;
 
     private final AtestadoRepository atestadoRepository;
+    private final DocumentoRepository documentoRepository;
+    private final ImplicadoRepository implicadoRepository;
 
-    public AtestadoResource(AtestadoRepository atestadoRepository) {
+    public AtestadoResource(AtestadoRepository atestadoRepository, DocumentoRepository documentoRepository, ImplicadoRepository implicadoRepository) {
         this.atestadoRepository = atestadoRepository;
+        this.documentoRepository = documentoRepository;
+        this.implicadoRepository = implicadoRepository;
     }
 
     /**
@@ -109,9 +119,27 @@ public class AtestadoResource {
      * @param id the id of the atestado to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+//    @Transactional
     @DeleteMapping("/atestados/{id}")
     public ResponseEntity<Void> deleteAtestado(@PathVariable Long id) {
         log.debug("REST request to delete Atestado : {}", id);
+/*
+        List<Documento> docs = documentoRepository.findDocumentosByAtestado(id);
+        log.debug("Comenzamos a borrar documentos del atestado: "+id);
+        for (Documento documento : docs) {
+            log.debug("Borrando documento: "+ documento.getId());
+            documentoRepository.deleteById(documento.getId());
+        }
+
+        log.debug("Comenzamos a borrar implicados del atestado: "+id);
+        List<Implicado> impls = implicadoRepository.findImplicadosByAtestado(id);
+        log.debug("Comenzamos a borrar implicados del atestado: "+id);
+        for (Implicado implicado : impls) {
+            log.debug("Borrando implicado "+ implicado.getId());
+            documentoRepository.deleteById(implicado.getId());
+        }
+*/
+        log.debug("Borramos atestado: ", id);
         atestadoRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }

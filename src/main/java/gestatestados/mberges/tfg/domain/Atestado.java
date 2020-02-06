@@ -77,11 +77,11 @@ public class Atestado implements Serializable {
     @JoinColumn(unique = true)
     private Remitente remitente;
 
-    @OneToMany(mappedBy = "atestado")
+    @OneToMany(mappedBy = "atestado", cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Documento> documentos = new HashSet<>();
 
-    @OneToMany(mappedBy = "atestado")
+    @OneToMany(mappedBy = "atestado", cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Implicado> implicados = new HashSet<>();
 

@@ -32,12 +32,12 @@
                 <td>{{documento.nombreDoc}}</td>
                 <td>{{documento.descDoc}}</td>
                 <td>
-                    <a *ngIf="documento.archivo" (click)="openFile(documento.archivoContentType, documento.archivo)">open</a>
-                    <span *ngIf="documento.archivo">{{documento.archivoContentType}}, {{byteSize(documento.archivo)}}</span>
+                    <a *ngIf="documento.archivo" (click)="openFile(documento.archivoContentType, documento.archivo)" class="alert-link">[Descargar Docx]</a>
+                    <span *ngIf="documento.archivo" class="d-none">{{documento.archivoContentType}}, {{byteSize(documento.archivo)}}</span>
                 </td>
                 <td>
-                    <a *ngIf="documento.archivoPdf" (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)">open</a>
-                    <span *ngIf="documento.archivoPdf">{{documento.archivoPdfContentType}}, {{byteSize(documento.archivoPdf)}}</span>
+                    <a *ngIf="documento.archivoPdf" (click)="openFile(documento.archivoPdfContentType, documento.archivoPdf)" class="alert-link">[Ver Pdf]</a>
+                    <span *ngIf="documento.archivoPdf" class="d-none">{{documento.archivoPdfContentType}}, {{byteSize(documento.archivoPdf)}}</span>
                 </td>
                 <td>
                     <div *ngIf="documento.atestado">

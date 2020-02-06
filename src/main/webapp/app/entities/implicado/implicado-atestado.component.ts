@@ -59,6 +59,10 @@ export class ImplicadoAtestadoComponent implements OnInit, OnDestroy {
       this.cargarImplicados(params['id']);
       this.idAtestado = params['id'];
     });
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInImplicados();
   }
   /*
   ngOnInit() {
@@ -77,11 +81,11 @@ export class ImplicadoAtestadoComponent implements OnInit, OnDestroy {
   trackId(index: number, item: IImplicado) {
     return item.id;
   }
-  /*
+
   registerChangeInImplicados() {
-    this.eventSubscriber = this.eventManager.subscribe('implicadoListModification', response => this.loadAll());
+    this.eventSubscriber = this.eventManager.subscribe('implicadoListModification', response => this.cargarImplicados(this.idAtestado));
   }
-*/
+
   protected onError(errorMessage: string) {
     this.jhiAlertService.error(errorMessage, null, null);
   }

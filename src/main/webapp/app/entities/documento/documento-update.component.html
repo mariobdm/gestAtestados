@@ -23,8 +23,8 @@
                     <label class="form-control-label" for="field_archivo">Archivo</label>
                     <div>
                         <div *ngIf="editForm.get('archivo').value" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(editForm.get('archivoContentType').value, editForm.get('archivo').value)">open</a><br>
-                            <span class="pull-left">{{editForm.get('archivoContentType').value}}, {{byteSize(editForm.get('archivo').value)}}</span>
+                            <a class="pull-left" (click)="openFile(editForm.get('archivoContentType').value, editForm.get('archivo').value)" class="alert-link">[Descargar]</a><br>
+                            <span class="pull-left d-none">{{editForm.get('archivoContentType').value}}, {{byteSize(editForm.get('archivo').value)}}</span>
                             <button type="button" (click)="editForm.patchValue({archivo: null});editForm.patchValue({archivoContentType: null});"
                                     class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon [icon]="'times'"></fa-icon>
@@ -41,8 +41,8 @@
                     <label class="form-control-label" for="field_archivoPdf">Archivo Pdf</label>
                     <div>
                         <div *ngIf="editForm.get('archivoPdf').value" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(editForm.get('archivoPdfContentType').value, editForm.get('archivoPdf').value)">open</a><br>
-                            <span class="pull-left">{{editForm.get('archivoPdfContentType').value}}, {{byteSize(editForm.get('archivoPdf').value)}}</span>
+                            <a class="pull-left" (click)="openFile(editForm.get('archivoPdfContentType').value, editForm.get('archivoPdf').value)" class="alert-link">[Ver Pdf]</a><br>
+                            <span class="pull-left d-none">{{editForm.get('archivoPdfContentType').value}}, {{byteSize(editForm.get('archivoPdf').value)}}</span>
                             <button type="button" (click)="editForm.patchValue({archivoPdf: null});editForm.patchValue({archivoPdfContentType: null});"
                                     class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon [icon]="'times'"></fa-icon>
